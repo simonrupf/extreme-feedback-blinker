@@ -42,6 +42,28 @@ filter rules to only allow the necessary host to access the devices port 80.
   tolerant (not WS281**1**)
 - jumper wires and bread board *or* light soldering skills and equipment
 
+## Wiring
+
+Example wiring of a NodeMCU with 470 Ohm resistor on the WS2812's data line:
+
+![NodeMCU with WS2812 Neopixel](https://raw.githubusercontent.com/simonrupf/extreme-feedback-blinker/master/NodeMCU%20WS2812.png)
+
+For a bare bones ESP-12 two pull-up/down resistors (10 kΩ) and a few capacitors
+are needed when using 5 V USB power via a linear voltage regulator:
+
+![ESP-12 with WS2812 Neopixel](https://raw.githubusercontent.com/simonrupf/extreme-feedback-blinker/master/ESP8266%20WS2812.png)
+
+Capacitor ratings are:
+- 100 nF (5 V to GND at voltage regulator)
+- 2.2 µF (3.3 V to GND at voltage regulator)
+- 470 µF (3.3 V to GND at ESP-12)
+- 100 nF (3.3 V to GND at ESP-12)
+
+Resistor ratings are:
+- 10 kΩ (pull-down from ESP-12 GND to GPIO 15)
+- 10 kΩ (pull-up from ESP-12 3.3 V to enable)
+- 470 Ω (data line from ESP-12 GND to WS2812 data-in)
+
 ## Limitations
 
 - All content is served over HTTP only.

@@ -64,8 +64,30 @@ Resistor ratings are:
 - 10 kΩ (pull-up from ESP-12 3.3 V to enable)
 - 470 Ω (data line from ESP-12 GND to WS2812 data-in)
 
+## Configuration
+
+The Arduino sketch has a number of constants at the top that can be adjusted:
+- `LED_NUM` - number of Neopixels you want to control, see note below
+- `LED_PIN` - you can use any available digital pin to drive your pixels, pin
+  14 lends itself as one of the PWM capable pins
+- `ANIMATION_DELAY` - ms to wait between each color change, decrease to speed up
+  the "breathing" animation of the colors
+- `ANIMATION_MINIMUM` - the darkest the LEDs go before increasing their
+  brightness, if set to 0 the LEDs will briefly turn off each cycle
+- If you have a FLORA version 1 Neopixel, you also have to change `NEO_GRB +`
+  `NEO_KHZ800` to `NEO_RGB + NEO_KHZ400`
+
+> Note that while you may increase the number of pixels controlled, your NodeMCU
+> powered via USB will probably not let you safely drive more then 5 pixels. For
+> larger numbers please use an additional 3.3 V power supply, battery or similar
+> and inject the power every 5 - 10 pixels or so. If using a power supply it is
+> also advisable to add a large 1000 µF before the power gets injected to the
+> pixels in order to prevent voltage bursts on power-up damageing your LEDs.
+
 ## Limitations
 
+- By it's nature, black is displayed as the absence of light, so the LED will
+  appear off. In general dark colors will appear dimmer then brighter ones.
 - All content is served over HTTP only.
 - There is no authentication implemented, anyone with access to that network
   can change the color.

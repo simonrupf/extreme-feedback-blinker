@@ -7,7 +7,7 @@
 
 #include <Adafruit_NeoPixel.h>
 
-#define LED_NUM 3
+#define LED_NUM 5
 #define LED_PIN 14
 #define ANIMATION_DELAY 750
 #define ANIMATION_MINIMUM 28
@@ -30,8 +30,8 @@ uint8_t red   = 0;
 uint8_t green = 0;
 uint8_t blue  = 255;
 
-bool animationDirection[] = {false, false, true};
-uint8_t animationBrightness[] = {255, 128, ANIMATION_MINIMUM};
+bool animationDirection[LED_NUM];
+uint8_t animationBrightness[LED_NUM];
 uint16_t animationCounter = 0;
 
 const char type[] PROGMEM = {"text/html"};
@@ -43,6 +43,7 @@ const char page[] PROGMEM = {
   "\t\t<p>\n"
   "\t\t\t<a href=\"?color=ff0000\"><button>red alert</button></a>\n"
   "\t\t\t<a href=\"?color=ffff00\"><button>yellow alert</button></a>\n"
+  "\t\t\t<a href=\"?color=0000ff\"><button>blue alert</button></a>\n"
   "\t\t\t<a href=\"?color=00ff00\"><button>all clear</button></a>\n"
   "\t\t</p>\n"
   "\t</body>\n"
@@ -73,7 +74,7 @@ void handleRoot() {
 }
 
 void handleAnimation() {
-  for (uint8_t i = 0; i < 3; ++i) {
+  for (uint8_t i = 0; i < LED_NUM; ++i) {
     led.setPixelColor(
       i,
       led.Color(
@@ -110,6 +111,15 @@ void setup() {
   led.setPixelColor(1, led.Color(0, 255, 0));
   led.setPixelColor(2, led.Color(0, 0, 255));
   led.show();
+
+  // Initialize animation arrays, so all pixels start at a different part of the cycle
+  for (uint8_t i = 0; i < LED_NUM; ++i) {
+    animationDirection[i]  = (i == LED_NUM - 1);
+    animationBrightness[i] = ceil(255 - (255 / (LED_NUM - 1) * i));
+    if (animationBrightness[i] < ANIMATION_MINIMUM) {
+      animationBrightness[i] = ANIMATION_MINIMUM;
+    }
+  }
 
   // Connect to WiFi network
   WiFiManager wifiManager;

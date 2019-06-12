@@ -38,13 +38,51 @@ const char type[] PROGMEM = {"text/html"};
 const char page[] PROGMEM = {
   "<!DOCTYPE HTML>\n"
   "<html>\n"
-  "\t<head><title>Extreme Feedback Blinker</title></head>\n"
+  "\t<head>\n"
+  "\t\t<title>Extreme Feedback Blinker</title>\n"
+  "\t\t<style>\n"
+  "\t\t\tbody {\n"
+  "\t\t\t\tcolor: #fff;\n"
+  "\t\t\t\tbackground-color: #333;\n"
+  "\t\t\t\tmargin: auto;\n"
+  "\t\t\t\twidth: max-content;\n"
+  "\t\t\t}\n"
+  "\t\t\th1 {\n"
+  "\t\t\t\ttext-shadow: 1px 1px 3px #999;\n"
+  "\t\t\t}\n"
+  "\t\t\t.led:before {\n"
+  "\t\t\t\tcontent: \"\\25CF\\00A0\";\n"
+  "\t\t\t\tfont-size: 1.2em;\n"
+  "\t\t\t}\n"
+  "\t\t\tbutton .led:before {\n"
+  "\t\t\t\ttext-shadow: 0 0 2px #666;\n"
+  "\t\t\t}\n"
+  "\t\t\t#state {\n"
+  "\t\t\t\tcolor: #XXXXXX;\n"
+  "\t\t\t\ttext-shadow: -1px -2px #fff, 3px 5px 7px #000;\n"
+  "\t\t\t\tanimation-name: breathe;\n"
+  "\t\t\t\tanimation-duration: 3s;\n"
+  "\t\t\t\tanimation-iteration-count: infinite;\n"
+  "\t\t\t}\n"
+  "\t\t\t@keyframes breathe {\n"
+  "\t\t\t\t0%   {opacity: 1;}\n"
+  "\t\t\t\t50%  {opacity: 0.2;}\n"
+  "\t\t\t\t100% {opacity: 1;}\n"
+  "\t\t\t}\n"
+  "\t\t</style>\n"
+  "\t</head>\n"
   "\t<body>\n"
+  "\t\t<h1>Extreme Feedback Blinker</h1>\n"
+  "\t\t<dl>\n"
+  "\t\t\t<dt>Current state:</dt>\n"
+  "\t\t\t<dd><span id=\"state\" class=\"led\"></span></dd>\n"
+  "\t\t</dl>\n"
+  "\t\t<p>Change state:</p>\n"
   "\t\t<p>\n"
-  "\t\t\t<a href=\"?color=ff0000\"><button>red alert</button></a>\n"
-  "\t\t\t<a href=\"?color=ffff00\"><button>yellow alert</button></a>\n"
-  "\t\t\t<a href=\"?color=0000ff\"><button>blue alert</button></a>\n"
-  "\t\t\t<a href=\"?color=00ff00\"><button>all clear</button></a>\n"
+  "\t\t\t<a href=\"?color=ff0000\"><button><span class=\"led\" style=\"color:#f00;\"></span> red alert</button></a>\n"
+  "\t\t\t<a href=\"?color=ffff00\"><button><span class=\"led\" style=\"color:#ff0;\"></span> yellow alert</button></a>\n"
+  "\t\t\t<a href=\"?color=0000ff\"><button><span class=\"led\" style=\"color:#00f;\"></span> blue alert</button></a>\n"
+  "\t\t\t<a href=\"?color=00ff00\"><button><span class=\"led\" style=\"color:#0f0;\"></span> all clear</button></a>\n"
   "\t\t</p>\n"
   "\t</body>\n"
   "</html>"
@@ -70,7 +108,9 @@ void handleRoot() {
     Serial.print("- blue  ");
     Serial.println(blue);
   }
-  server.send_P(200, type, page);
+  String content = FPSTR(page);
+  content.replace("XXXXXX", color);
+  server.send(200, FPSTR(type), content);
 }
 
 void handleAnimation() {

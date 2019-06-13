@@ -76,8 +76,8 @@ The Arduino sketch has a number of constants at the top that can be adjusted:
   the "breathing" animation of the colors
 - `ANIMATION_MINIMUM` - the darkest the LEDs go before increasing their
   brightness, if set to 0 the LEDs will briefly turn off each cycle
-- If you have a FLORA version 1 Neopixel, you also have to change `NEO_GRB +`
-  `NEO_KHZ800` to `NEO_RGB + NEO_KHZ400`
+- If you have a FLORA version 1 Neopixel, you also have to change `NEO_GRB +
+  NEO_KHZ800` to `NEO_RGB + NEO_KHZ400`
 
 > Note that while you may increase the number of pixels controlled, your NodeMCU
 > powered via USB will probably not let you safely drive more then 5 pixels. For

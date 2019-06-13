@@ -22,6 +22,8 @@ default color. At this point in time you can connect to the device via a
 webbrowser to see a page with multiple buttons to change the color of the LEDs.
 You can find the IP of the device via your DHCP servers leases.
 
+![web interface, state set to "all clear"](https://raw.githubusercontent.com/simonrupf/extreme-feedback-blinker/master/webinterface.png)
+
 The color is controlled via a GET parameter called "color" and expects the 24
 bit RGB color in hexadecimal notation (like in CSS). Click the example buttons
 to see some URLs with the codes for the labeled colors. It should be easy to

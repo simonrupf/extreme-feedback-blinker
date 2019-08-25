@@ -39,6 +39,7 @@ const char page[] PROGMEM = {
   "<!DOCTYPE HTML>\n"
   "<html>\n"
   "\t<head>\n"
+  "\t\t<meta charset=\"utf-8\"/>\n"
   "\t\t<title>Extreme Feedback Blinker</title>\n"
   "\t\t<style>\n"
   "\t\t\tbody {\n"

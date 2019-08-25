@@ -7,7 +7,7 @@
 
 #include <Adafruit_NeoPixel.h>
 
-#define LED_NUM 5
+#define LED_NUM 3
 #define LED_PIN 14
 #define ANIMATION_DELAY 750
 #define ANIMATION_MINIMUM 28

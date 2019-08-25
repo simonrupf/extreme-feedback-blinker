@@ -29,6 +29,9 @@ String color = "0000ff";
 uint8_t red   = 0;
 uint8_t green = 0;
 uint8_t blue  = 255;
+uint8_t display_red   = 0;
+uint8_t display_green = 0;
+uint8_t display_blue  = 255;
 
 bool animationDirection[LED_NUM];
 uint8_t animationBrightness[LED_NUM];
@@ -116,13 +119,16 @@ void handleRoot() {
 }
 
 void handleAnimation() {
+  updateColor(red, display_red);
+  updateColor(green, display_green);
+  updateColor(blue, display_blue);
   for (uint8_t i = 0; i < LED_NUM; ++i) {
     led.setPixelColor(
       i,
       led.Color(
-        red   / 255.0 * animationBrightness[i],
-        green / 255.0 * animationBrightness[i],
-        blue  / 255.0 * animationBrightness[i]
+        display_red   / 255.0 * animationBrightness[i],
+        display_green / 255.0 * animationBrightness[i],
+        display_blue  / 255.0 * animationBrightness[i]
       )
     );
     // handle animation loop
@@ -136,6 +142,14 @@ void handleAnimation() {
     }
   }
   led.show();
+}
+
+void updateColor(uint8_t & color, uint8_t & display_color) {
+  if (color > display_color) {
+    ++display_color;
+  } else if (color < display_color) {
+    --display_color;
+  }
 }
 
 void setup() {

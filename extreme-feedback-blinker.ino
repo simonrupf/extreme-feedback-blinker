@@ -75,7 +75,7 @@ const char page[] PROGMEM = {
   "\t\t<h1>Extreme Feedback Blinker</h1>\n"
   "\t\t<dl>\n"
   "\t\t\t<dt>Current state:</dt>\n"
-  "\t\t\t<dd><span id=\"state\" class=\"led\"></span></dd>\n"
+  "\t\t\t<dd><span id=\"state\" class=\"led\"></span> <a href=\"./\"><button style=\"float:right\">refresh</button></a></dd>\n"
   "\t\t</dl>\n"
   "\t\t<p>Change state:</p>\n"
   "\t\t<p>\n"
@@ -108,6 +108,7 @@ void handleRoot() {
     Serial.print("- blue  ");
     Serial.println(blue);
   }
+  server.sendHeader("Cache-Control", "no-cache, max-age=0, must-revalidate, no-store");
   String content = FPSTR(page);
   content.replace("XXXXXX", color);
   server.send(200, FPSTR(type), content);

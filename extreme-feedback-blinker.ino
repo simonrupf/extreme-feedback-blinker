@@ -46,6 +46,7 @@ const char page[] PROGMEM = {
   "\t\t<title>Extreme Feedback Blinker</title>\n"
   "\t\t<style>\n"
   "\t\t\tbody {\n"
+  "\t\t\t\tfont-family: sans-serif;\n"
   "\t\t\t\tcolor: #fff;\n"
   "\t\t\t\tbackground-color: #333;\n"
   "\t\t\t\tmargin: auto;\n"

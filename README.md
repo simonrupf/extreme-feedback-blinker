@@ -56,15 +56,15 @@ are needed when using 5 V USB power via a linear voltage regulator:
 ![ESP-12 with WS2812 Neopixel](https://raw.githubusercontent.com/simonrupf/extreme-feedback-blinker/master/ESP8266%20WS2812.png)
 
 Capacitor ratings are:
-- 100 nF (5 V to GND at voltage regulator)
-- 2.2 µF (3.3 V to GND at voltage regulator)
-- 470 µF (3.3 V to GND at ESP-12)
-- 100 nF (3.3 V to GND at ESP-12)
+- C1 100 nF (5 V to GND at voltage regulator)
+- C2 2.2 µF (3.3 V to GND at voltage regulator)
+- C3 470 µF (3.3 V to GND at ESP-12)
+- C4 100 nF (3.3 V to GND at ESP-12)
 
 Resistor ratings are:
-- 10 kΩ (pull-down from ESP-12 GND to GPIO 15)
-- 10 kΩ (pull-up from ESP-12 3.3 V to enable)
-- 470 Ω (data line from ESP-12 GND to WS2812 data-in)
+- R3 10 kΩ (pull-down from ESP-12 GND to GPIO 15)
+- R4 10 kΩ (pull-up from ESP-12 3.3 V to enable)
+- R5 470 Ω (data line from ESP-12 GND to WS2812 data-in)
 
 ## Configuration
 
